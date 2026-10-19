@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#07353d" />
+    <meta name="description" content="鹈鹕杯海岸竞速 —— 一场阳光、海风与长嘴鸟的自行车比赛。" />
+    <title>鹈鹕杯 · 海岸竞速 | Pelican Grand Prix</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2307353d'/%3E%3Cpath fill='%23fff6e6' d='M9 34c1-9 8-15 17-15 6 0 11 2 14 6l13 1-11 5c-1 8-8 14-17 14-9 0-16-5-16-11Z'/%3E%3Cpath fill='%23ff6b4a' d='M36 26l20 2-17 5Z'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="scene-container"></div>
+      <div class="sun-wash" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+      <div class="vignette" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Pelican Grand Prix 首页">
+          <span class="brand-mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path fill="#fff6e6" d="M9 34c1-9 8-15 17-15 6 0 11 2 14 6l13 1-11 5c-1 8-8 14-17 14-9 0-16-5-16-11Z"/>
+              <path fill="#ff6b4a" d="M36 26l20 2-17 5Z"/>
+              <circle cx="31" cy="27" r="2" fill="#07353d"/>
+            </svg>
+          </span>
+          <span class="brand-copy">
+            <b>PELICAN</b>
+            <em>GRAND PRIX</em>
+          </span>
+        </a>
+
+        <nav class="top-actions" aria-label="游戏设置">
+          <button id="sound-toggle" class="icon-button" type="button" aria-label="关闭声音" title="声音 (M)">
+            <svg class="sound-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h4l5 4v-13l-5 4H4Zm12.5-2a6.5 6.5 0 0 1 0 9M19 5a10 10 0 0 1 0 14"/></svg>
+            <svg class="sound-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h4l5 4v-13l-5 4H4Zm12 1 5 5m0-5-5 5"/></svg>
+          </button>
+          <button id="camera-toggle" class="icon-button" type="button" aria-label="切换视角" title="切换视角 (C)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4V8Z"/><circle cx="12" cy="13" r="3.4"/></svg>
+          </button>
+          <button id="help-toggle" class="icon-button desktop-only" type="button" aria-label="操作说明" title="操作说明">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.1.8-1.1 1.8M12 17h.01"/></svg>
+          </button>
+        </nav>
+      </header>
+
+      <main class="ui-layer">
+        <section id="intro" class="intro">
+          <div class="intro-card">
+            <div class="eyebrow">
+              <span class="live-dot"></span>
+              SEASIDE CUP · 2026
+              <span class="eyebrow-rule"></span>
+              <span>GULLWING BAY</span>
+            </div>
+            <h1>
+              <span class="title-top">鹈鹕杯</span>
+              <span class="title-main">海岸<span class="accent">竞速</span></span>
+            </h1>
+            <p class="intro-sub">PELICAN GRAND PRIX</p>
+            <p class="intro-copy">六只长嘴骑手，一条海风赛道。抓住节奏，冲出鸟群，把第一名的鱼带回家。</p>
+
+            <div class="kit-row">
+              <span class="kit-label">选择队服</span>
+              <div class="swatches" role="radiogroup" aria-label="选择队服颜色">
+                <button class="swatch is-active" data-kit="coral" type="button" style="--swatch:#ff6b4a" aria-label="珊瑚橙队服" aria-checked="true" role="radio"></button>
+                <button class="swatch" data-kit="teal" type="button" style="--swatch:#20c4b5" aria-label="海松绿队服" aria-checked="false" role="radio"></button>
+                <button class="swatch" data-kit="mango" type="button" style="--swatch:#ffc247" aria-label="芒果黄队服" aria-checked="false" role="radio"></button>
+              </div>
+              <span class="kit-name" id="kit-name">CORAL CRUISER</span>
+            </div>
+
+            <div class="intro-actions">
+              <button id="start-button" class="primary-button" type="button">
+                <span>开始比赛</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+              </button>
+              <div class="race-facts">
+                <span><b>480</b> M</span>
+                <span><b>6</b> RIDERS</span>
+                <span><b>3</b> FISH</span>
+              </div>
+            </div>
+
+            <div class="control-strip">
+              <span><kbd>W</kbd><kbd>SPACE</kbd> 冲刺</span>
+              <span><kbd>A</kbd><kbd>D</kbd> 变向</span>
+              <span><kbd>C</kbd> 视角</span>
+            </div>
+          </div>
+          <div class="intro-footnote">
+            <span>海岸气象 24°C · 顺风 3.2 m/s</span>
+            <span class="scroll-note">按住空格，别让翅膀闲下来</span>
+          </div>
+        </section>
+
+        <section id="hud" class="hud is-hidden" aria-live="polite">
+          <div class="hud-top">
+            <div class="position-card glass">
+              <span class="hud-label">排名</span>
+              <div class="position-value"><b id="position-text">1</b><span>/ 6</span></div>
+              <span class="position-team" id="position-team">PELICAN</span>
+            </div>
+
+            <div class="race-progress glass">
+              <div class="progress-head">
+                <span id="race-location">GULLWING BAY</span>
+                <span><b id="distance-text">0</b> / 480 M</span>
+              </div>
+              <div class="progress-rail" id="progress-rail">
+                <div class="progress-fill" id="progress-fill"></div>
+                <div class="progress-markers" id="progress-markers"></div>
+                <div class="finish-notch"></div>
+              </div>
+            </div>
+
+            <div class="timer-card glass">
+              <span class="hud-label">用时</span>
+              <b id="timer-text">00:00.0</b>
+              <span class="timer-best">最佳 <em id="best-time">--:--</em></span>
+            </div>
+          </div>
+
+          <div class="hud-bottom">
+            <div class="speed-card glass">
+              <div class="speed-readout">
+                <b id="speed-text">0</b>
+                <span>KM/H</span>
+              </div>
+              <div class="meters">
+                <div class="meter-row">
+                  <span>体力</span>
+                  <div class="meter"><i id="energy-fill"></i></div>
+                </div>
+                <div class="meter-row fish-row">
+                  <span>鱼获</span>
+                  <div class="fish-count"><svg viewBox="0 0 28 18" aria-hidden="true"><path d="M2 9c4-5 10-6 14-2l7-4-2 6 2 6-7-4c-4 4-10 3-14-2Z"/><circle cx="16" cy="8" r="1" fill="#07353d"/></svg><b id="fish-text">0</b><em>/ 3</em></div>
+                </div>
+              </div>
+              <div class="sprint-hint" id="sprint-hint"><span>按住</span><kbd>SPACE</kbd><span>冲刺</span></div>
+            </div>
+
+            <div class="mid-race-tip" id="mid-race-tip">
+              <span class="tip-dot"></span>
+              <span id="tip-text">跟上领骑，寻找海面上的鱼跃点</span>
+            </div>
+
+            <div class="next-gate glass">
+              <span class="hud-label">下一标记</span>
+              <b id="next-mark">FISH · 80M</b>
+              <span id="next-mark-sub">保持速度</span>
+            </div>
+          </div>
+        </section>
+
+        <div id="countdown" class="countdown is-hidden" aria-live="assertive">
+          <span id="countdown-number">3</span>
+          <small id="countdown-caption">把翅膀放在车把上</small>
+        </div>
+
+        <div id="toast" class="toast" aria-live="polite">
+          <span id="toast-icon">✦</span>
+          <span id="toast-text">鲭鱼加速！</span>
+        </div>
+      </main>
+
+      <div id="touch-controls" class="touch-controls is-hidden">
+        <button id="touch-left" class="touch-button" type="button" aria-label="向左">←</button>
+        <button id="touch-sprint" class="touch-button sprint" type="button" aria-label="冲刺"><span>冲刺</span><small>HOLD</small></button>
+        <button id="touch-right" class="touch-button" type="button" aria-label="向右">→</button>
+      </div>
+
+      <section id="results" class="results is-hidden" aria-labelledby="results-title">
+        <div class="results-card">
+          <div class="results-glow"></div>
+          <p class="eyebrow">GULLWING BAY · FINAL</p>
+          <div class="medal" id="medal">01</div>
+          <h2 id="results-title">漂亮的一冲！</h2>
+          <p class="results-copy" id="results-copy">你把整片海风甩在了身后。</p>
+          <div class="result-stats">
+            <div><span>最终排名</span><b id="result-place">1 / 6</b></div>
+            <div><span>完赛用时</span><b id="result-time">00:00.0</b></div>
+            <div><span>鱼获</span><b id="result-fish">0 / 3</b></div>
+          </div>
+          <div class="podium" id="podium"></div>
+          <div class="result-actions">
+            <button id="replay-button" class="primary-button" type="button">
+              <span>再来一局</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 6M20 5v6h-6"/></svg>
+            </button>
+            <button id="home-button" class="secondary-button" type="button">返回起点</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="help-panel" class="help-panel is-hidden" aria-labelledby="help-title">
+        <button id="help-close" class="help-close" type="button" aria-label="关闭说明">×</button>
+        <p class="eyebrow">HOW TO RACE</p>
+        <h2 id="help-title">骑上这只鹈鹕</h2>
+        <div class="help-grid">
+          <div><kbd>W</kbd><kbd>SPACE</kbd><span>按住冲刺，消耗体力</span></div>
+          <div><kbd>A</kbd><kbd>D</kbd><span>左右变向，寻找鱼获</span></div>
+          <div><kbd>C</kbd><span>切换追尾 / 电影视角</span></div>
+          <div><kbd>M</kbd><span>打开或关闭声音</span></div>
+        </div>
+        <p class="help-note">小贴士：松开冲刺会恢复体力。穿过发光的鲭鱼标记可获得一次爆发加速。</p>
+      </section>
+
+      <div id="loading" class="loading">
+        <div class="loading-mark">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><path fill="#fff6e6" d="M9 34c1-9 8-15 17-15 6 0 11 2 14 6l13 1-11 5c-1 8-8 14-17 14-9 0-16-5-16-11Z"/><path fill="#ff6b4a" d="M36 26l20 2-17 5Z"/></svg>
+        </div>
+        <span>正在召集鹈鹕…</span>
+        <div class="loading-bar"><i></i></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

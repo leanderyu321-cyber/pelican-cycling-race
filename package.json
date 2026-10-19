@@ -1,0 +1,29 @@
+{
+  "name": "pelican-cycling-race",
+  "version": "1.0.0",
+  "description": "鹈鹕杯海岸竞速 — a 3D pelican bicycle race built with Three.js",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "keywords": [
+    "threejs",
+    "vite",
+    "game",
+    "pelican",
+    "cycling",
+    "3d"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource-variable/manrope": "^5.3.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.3"
+  },
+  "private": true
+}
